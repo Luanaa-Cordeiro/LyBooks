@@ -14,41 +14,8 @@
     @extends('nav')
 
 
-    <!-- Main modal -->
-    <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex justify-center items-center">
-        <!-- Overlay background (escurecido apenas ao redor do modal) -->
-        <div class="absolute inset-0 bg-black opacity-50"></div>
-
-        <!-- Modal content -->
-        <div class="relative p-4 w-full max-w-md max-h-full z-10 bg-white rounded-lg shadow-sm">
-            <!-- Modal header -->
-            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                <h3 class="text-xl font-semibold text-gray-900">
-                    Criar aluguel
-                </h3>
-                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-hide="authentication-modal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-            </div>
-            <!-- Modal body -->
-            <div class="p-4 md:p-5">
-                <form class="space-y-4" action="{{ route('alugueis.store')}}" method="post">
-                    @csrf
-                    <div>
-                        <label for="nome" class="block mb-2 text-sm font-medium text-gray-900">Aluguel <span style="color:red;">*</span></label>
-                        <input name="nome" id="nome" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="nome" value='{{old("nome")}}' required />
-                    </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Criar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-<div class="px-25 py-15 sm:ml-80">
-<div style="background-color:#D09953;  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.267);" class="mt-20 p-4 rounded-lg">
+<div class="px-50 py-15 sm:ml-80">
+<div style="background-color:#013C3C;  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.267);" class="mt-20 p-4 rounded-lg">
    <div style="background-color:white; box-shadow: 0 4px 5px rgba(0, 0, 0, 0.267); " class="mostrar m-2 p-4 rounded-lg ">
     
    <div>
@@ -57,19 +24,23 @@
 
                 <div class="infos_show">
                     <h1 class="text-4xl font-bold text-gray-900">{{$aluguel->nome}}</h1>
-                    <p>Locatário: {{$aluguel->locatario}}</p>
-                    <p>Aluguel: {{ $aluguel->data_aluguel_formatada }}</p>
-                    <p>Devolução: {{ $aluguel->data_devolucao_formatada }}</p>
+                    <p><span style="color:black; font-weight: 500;">Locatário:</span>  {{$aluguel->locatario}}</p>
+                    <p><span style="color:black; font-weight: 500;">Aluguel:</span>  {{ $aluguel->data_aluguel_formatada }}</p>
+                    <p><span style="color:black; font-weight: 500;">Devolução:</span>  {{ $aluguel->data_devolucao_formatada }}</p>
 
 
-                    <div class="w-full">
-                        <button style="margin-top:60px;" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="w-full block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
-                            Deletar
-                        </button>
-                        <a href="{{route('alugueis.index')}}">
-                            <button style="background-color:white; color:black;" type="button" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" id="criar">Voltar
-                            </button>
-                        </a>
+                    <div class="delet_volt h-full w-full">
+                    <form action="{{ route('alugueis.destroy', ['aluguel' => $aluguel->id]) }}" method="post"  onsubmit="return confirm('Tem certeza que deseja excluir este aluguel?');">
+    @csrf
+    <input type="hidden" name="_method" value="delete">
+   <button class="w-full block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="submit">
+    Deletar
+</button>
+<a href="{{route('alugueis.index')}}">
+                    <button style="background-color:white; color:black;" type="button" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" id="criar">Voltar
+                    </button>
+                    </a>
+                    </form>
                     </div>
                 </div>
 
@@ -77,39 +48,6 @@
         </div>
     </div>
 
-
-    <div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 left-0 right-0 bottom-0 z-50 justify-center items-center flex bg-opacity-50">
-        <div class="relative p-4 w-full max-w-md max-h-full">
-            <div class="relative bg-white rounded-lg shadow">
-                <!-- Botão de fechar -->
-                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center" data-modal-hide="popup-modal">
-                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                    </svg>
-                    <span class="sr-only">Close modal</span>
-                </button>
-
-                <div class="p-4 md:p-5 text-center">
-                    <!-- Ícone do modal -->
-                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500">Tem certeza que deseja apagar esse aluguel?</h3>
-                    <h4 class="mb-5  font-normal text-gray-500">Você apagará tudo relacionado a ele</h4>
-                    <form action="{{ route('alugueis.destroy', ['aluguel' => $aluguel->id]) }}" method="post">
-                        @csrf
-                        <input type="hidden" name="_method" value="delete">
-                        <!-- Botões dentro do modal -->
-                        <button data-modal-hide="popup-modal" type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
-                            Apagar
-                        </button>
-
-                        <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100">Cancelar</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
         //Modal
