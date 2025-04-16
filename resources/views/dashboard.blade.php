@@ -125,10 +125,10 @@
             <div class="liv_gen">
             <div style="height: 150px; margin: 0px 10px; width: 350px; background-color:#027373;" class=" liv_ge max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" src="{{ asset('assets/images/abra-o-livro.png') }}" alt="" >
-    <a href="#">
+    <a href="{{route('books.index')}}">
         <h5 style="color:white;" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Livros</h5>
     </a>
-    <p class="mb-3 font-normal text-black-500 dark:text-gray-400">Quantidade: </p>
+    <p class="mb-3 font-normal text-black-500 dark:text-gray-400">Quantidade: {{ $total_book }} </p>
 </div>
 
 

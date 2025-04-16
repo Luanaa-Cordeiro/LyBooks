@@ -8,6 +8,7 @@ use App\Models\Language;
 use App\Models\Author;
 use App\Models\Aluguel;
 use App\Models\User;
+use App\Models\Book;
 
 
 
@@ -22,6 +23,7 @@ class HomeController extends Controller
         $totalAuthors = Author::count();
         $totalAluguel = Aluguel::count();
         $totalUser = User::count();
+        $totalBook= Book::count();
 
         return view('dashboard', [
             'total_editoras' => $totalEditoras,
@@ -30,6 +32,7 @@ class HomeController extends Controller
             'total_authors' =>  $totalAuthors,
             'total_aluguel' =>   $totalAluguel,
             'total_user' =>     $totalUser,
+            'total_book' =>     $totalBook,
         ]);
         
     }

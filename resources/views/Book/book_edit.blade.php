@@ -46,7 +46,7 @@
 
                     <!-- Autor -->
                     <div>
-                        <label for="author_id" class="block mb-2 text-sm font-medium text-gray-900">Autor</label>
+                        <label for="author_id" class="block mb-2 text-sm font-medium text-gray-900">Autor <span style="color:red; margin-left:2px;">*</span></label>
                         <select name="author_id" id="author_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5">
                             <option value="">Selecione um autor</option>
                             @foreach($authors as $author)
@@ -58,7 +58,7 @@
 
                     <!-- Linguagem -->
                     <div>
-                        <label for="linguagem_id" class="block mb-2 text-sm font-medium text-gray-900">Linguagem</label>
+                        <label for="linguagem_id" class="block mb-2 text-sm font-medium text-gray-900">Linguagem <span style="color:red; margin-left:2px;">*</span></label>
                         <select name="language_id" id="language_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5">
                             <option value="">Selecione uma linguagem</option>
                             @foreach($languages as $language)
@@ -69,7 +69,7 @@
 
                     <!-- Gênero -->
                     <div>
-                        <label for="genero_id" class="block mb-2 text-sm font-medium text-gray-900">Gênero</label>
+                        <label for="genero_id" class="block mb-2 text-sm font-medium text-gray-900">Gênero <span style="color:red; margin-left:2px;">*</span></label>
                         <select name="genero_id" id="genero_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5">
                             <option value="">Selecione um gênero</option>
                             @foreach($generos as $genero)
@@ -80,7 +80,7 @@
 
                     <!-- Editora -->
                     <div>
-                        <label for="editor_id" class="block mb-2 text-sm font-medium text-gray-900">Editora</label>
+                        <label for="editor_id" class="block mb-2 text-sm font-medium text-gray-900">Editora <span style="color:red; margin-left:2px;">*</span></label>
                         <select name="editor_id" id="editor_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5">
                             <option value="">Selecione uma editora</option>
                             @foreach($editoras as $editor)
