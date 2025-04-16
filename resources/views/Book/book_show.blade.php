@@ -57,10 +57,10 @@
 
    <div class="infos_show">
    <h1 class="text-4xl font-bold text-gray-900">{{$books->nome}}</h1>
-   <p class="mb-3 font-normal text-gray-700">Autor: {{ $books->author->nome }}</p>
-   <p class="mb-3 font-normal text-gray-700">Linguagem: {{ $books->language->idioma }}</p>
-    <p class="mb-3 font-normal text-gray-700">Gênero: {{ $books->genero->nome }}</p>
-    <p class="mb-3 font-normal text-gray-700">Editora: {{ $books->editor->nome }}</p>
+   <p class="mb-3 font-normal text-gray-700"><span style="color:black; font-weight: 500;">Autor:</span> {{ $books->author->nome }}</p>
+   <p class="mb-3 font-normal text-gray-700"><span style="color:black; font-weight: 500;">Linguagem:</span> {{ $books->language->idioma }}</p>
+    <p class="mb-3 font-normal text-gray-700"><span style="color:black; font-weight: 500;">Gênero:</span> {{ $books->genero->nome }}</p>
+    <p class="mb-3 font-normal text-gray-700"><span style="color:black; font-weight: 500;">Editora:</span> {{ $books->editor->nome }}</p>
     
 
    <div class="delet_volt h-full w-full">

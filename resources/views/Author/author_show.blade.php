@@ -24,7 +24,7 @@
 
    <div class="infos_show">
    <h1 class="text-4xl font-bold text-gray-900">{{$authors->nome}}</h1>
-   <p>Descrição: {{$authors->descricao}}</p>
+   <p><span style="color:black; font-weight: 500;">Descrição:</span> {{$authors->descricao}}</p>
 
    <div class="delet_volt h-full w-full">
    <button style="margin-top:60px;" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="w-full block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">

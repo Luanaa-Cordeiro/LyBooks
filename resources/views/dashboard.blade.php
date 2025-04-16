@@ -32,13 +32,13 @@
 
     <div class="grafic_pizza">
         
-<div style="height:450px" class="max-w-sm w-full bg-white rounded-lg shadow-sm dark:bg-gray-800 p-4 md:p-6">
+<div style="height:450px" class="max-w-sm w-full bg-white rounded-lg shadow-sm p-4 md:p-6">
 
 <div class="flex justify-between items-start w-full">
     <div class="flex-col items-center">
       <div class="flex items-center mb-1">
-          <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white me-1">Livros</h5>
-          <svg data-popover-target="chart-info" data-popover-placement="bottom" class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <h5 class="text-xl font-bold leading-none text-gray-900 me-1">Livros</h5>
+          <svg data-popover-target="chart-info" data-popover-placement="bottom" class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 cursor-pointer ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm0 16a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm1-5.034V12a1 1 0 0 1-2 0v-1.418a1 1 0 0 1 1.038-.999 1.436 1.436 0 0 0 1.488-1.441 1.501 1.501 0 1 0-3-.116.986.986 0 0 1-1.037.961 1 1 0 0 1-.96-1.037A3.5 3.5 0 1 1 11 11.466Z"/>
           </svg>
           <div data-popover id="chart-info" role="tooltip" class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-xs opacity-0 w-72 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400">
@@ -92,7 +92,7 @@
 <div class="infos_main">
 
 <div class="info1">
-<div  style=" height: 210px;" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+<div  style=" height: 210px;" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
   <div style=" display:flex; flex-direction:row; ">
     <a href="{{route('languages.index')}}">
         <h5 style="color:black; margin-right:10px" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">Idiomas</h5>
@@ -104,12 +104,12 @@
 </div>
 
 <div class="info2">
-<div  style=" height: 210px; ; " class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+<div  style=" height: 210px; ; " class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
 <div style=" display:flex; flex-direction:row; ">
     <a href="">
-        <h5 style="color:black; margin-right:10px" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Usuários</h5>
+        <h5 style="color:black; margin-right:10px" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">Usuários</h5>
     </a>
-    <img class="rounded-t-lg w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" src="{{ asset('assets/images/pessoa.png') }}" alt="" >
+    <img class="rounded-t-lg w-7 h-7 text-gray-500 mb-3" src="{{ asset('assets/images/pessoa.png') }}" alt="" >
     </div>
     <p class="mb-3 font-normal text-black-500">Quantidade: {{ $total_user }}</p>
 </div>
@@ -123,17 +123,17 @@
       <div>
         <div class="tabelas">
             <div class="liv_gen">
-            <div style="height: 150px; margin: 0px 10px; width: 350px; background-color:#027373;" class=" liv_ge max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <div style="height: 150px; margin: 0px 10px; width: 350px; background-color:#027373;" class=" liv_ge max-w-sm p-6 bg-white rounded-lg shadow-sm">
             <img class="rounded-t-lg w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" src="{{ asset('assets/images/abra-o-livro.png') }}" alt="" >
     <a href="{{route('books.index')}}">
-        <h5 style="color:white;" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Livros</h5>
+        <h5 style="color:white;" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">Livros</h5>
     </a>
-    <p class="mb-3 font-normal text-black-500 dark:text-gray-400">Quantidade: {{ $total_book }} </p>
+    <p class="mb-3 font-normal text-black-500">Quantidade: {{ $total_book }} </p>
 </div>
 
 
 
-<div style="height: 150px; width: 350px;margin: 0px 10px; background-color:#FFB400;" class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+<div style="height: 150px; width: 350px;margin: 0px 10px; background-color:#FFB400;" class="max-w-sm p-6 bg-white rounded-lg shadow-sm">
     <img class="rounded-t-lg w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" src="{{ asset('assets/images/fantasma.png') }}" alt="" >
     <a href="{{route('generos.index')}}">
     <h5 style="color:white;" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">Gêneros</h5>
@@ -146,7 +146,7 @@
             <div class="aut_edit">
 
 
-            <div  style="height: 150px; width: 350px; margin: 10px 10px; background-color:#E63946; "  class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+            <div  style="height: 150px; width: 350px; margin: 10px 10px; background-color:#E63946; "  class="max-w-sm p-6 bg-white rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <img class="rounded-t-lg w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" src="{{ asset('assets/images/editora.png') }}" alt="" >
     <a href="{{route('editoras.index')}}">
         <h5 style="color:white;" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900">Editoras</h5>
@@ -156,7 +156,7 @@
 
 
 
-<div  style="height: 150px; width: 350px;margin: 10px 10px; background-color:#F2542D ; " class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+<div  style="height: 150px; width: 350px;margin: 10px 10px; background-color:#F2542D ; " class="max-w-sm p-6 bg-white rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
     <img class="rounded-t-lg w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" src="{{ asset('assets/images/autores.png') }}" alt="" >
     <a href="{{route('authors.index')}}">
         <h5 style="color:white;" class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Autores</h5>
@@ -170,7 +170,7 @@
 
         <div class="info">
         
-<div class=" p-9 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+<div class=" p-9 bg-white border border-gray-200 rounded-lg shadow-sm">
     <span style="font-size: 40px">{{ $total_aluguel }}</span>
     <p class="mb-3 font-normal text-black-500">Alugados</p>
 </div>
