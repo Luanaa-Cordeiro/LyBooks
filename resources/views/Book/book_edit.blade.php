@@ -13,7 +13,7 @@
 
     @extends('nav')
 
-    <div class="py-60 px-100 sm:ml-80">
+    <div class="py-30 px-100 sm:ml-80">
 
         <div style="background-color:white; box-shadow: 0 4px 5px rgba(0, 0, 0, 0.267);" class="relative overflow-x-auto shadow-md sm:rounded-lg">
             <div style="background-color:#013C3C;" class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
@@ -41,7 +41,7 @@
                     <!-- Nome -->
                     <div>
                         <label for="nome" class="block mb-2 text-sm font-medium text-gray-900">Nome do Livro <span class="text-red-600">*</span></label>
-                        <input type="text" name="nome" id="nome" value="{{ old('nome', $book->nome) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" required>
+                        <input type="text" name="nome" id="nome" value="{{ old('nome', $book->nome) }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5" >
                     </div>
 
                     <!-- Autor -->
@@ -50,7 +50,7 @@
                         <select name="author_id" id="author_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5">
                             <option value="">Selecione um autor</option>
                             @foreach($authors as $author)
-                            <option value="{{ $author->id }}" {{ old('author_id', $book->author_id) == $author->id ? 'selected' : '' }}>
+                            <option value="{{ $author->id }}" {{ $book->author_id == $author->id ? 'selected' : '' }}>
                                 {{ $author->nome }}
                             </option> @endforeach
                         </select>
@@ -59,10 +59,10 @@
                     <!-- Linguagem -->
                     <div>
                         <label for="linguagem_id" class="block mb-2 text-sm font-medium text-gray-900">Linguagem</label>
-                        <select name="linguagem_id" id="linguagem_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5">
+                        <select name="language_id" id="language_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg w-full p-2.5">
                             <option value="">Selecione uma linguagem</option>
                             @foreach($languages as $language)
-                            <option value="{{ $language->id }}" {{ $book->linguagem_id == $language->id ? 'selected' : '' }}>{{ $language->idioma }}</option>
+                            <option value="{{ $language->id }}" {{ $book->language_id == $language->id ? 'selected' : '' }}>{{ $language->idioma }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -90,10 +90,10 @@
                     </div>
 
                     <!-- Botões -->
-                    <button type="submit" style="background-color:#035353;" class="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">Salvar Alterações</button>
+                    <button type="submit" style="background-color:#035353;" class="w-full text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center">Editar</button>
 
                     <a href="{{ route('books.index') }}">
-                        <button type="button" style="background-color:white; color:black;" class="w-full border border-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 mt-2 text-center">Voltar</button>
+                        <button type="button" style="background-color:white; color:black;" class="w-full font-medium rounded-lg text-sm px-5 py-2. text-center">Voltar</button>
                     </a>
                 </form>
 
