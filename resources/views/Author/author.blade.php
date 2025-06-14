@@ -223,71 +223,88 @@
 
 
          <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // Modal abrir/fechar
-        const modal = document.getElementById('authentication-modal');
-        const openModalButton = document.querySelector('[data-modal-target="authentication-modal"]');
-        const closeModalButton = document.querySelector('[data-modal-hide="authentication-modal"]');
+ document.addEventListener('DOMContentLoaded', () => {
+    // Modal abrir/fechar
+    const modal = document.getElementById('authentication-modal');
+    const openModalButton = document.querySelector('[data-modal-target="authentication-modal"]');
+    const closeModalButton = document.querySelector('[data-modal-hide="authentication-modal"]');
 
-        openModalButton?.addEventListener('click', () => {
-            modal?.classList.remove('hidden');
-        });
+    openModalButton?.addEventListener('click', () => {
+        modal?.classList.remove('hidden');
+    });
 
-        closeModalButton?.addEventListener('click', () => {
-            modal?.classList.add('hidden');
-        });
+    closeModalButton?.addEventListener('click', () => {
+        modal?.classList.add('hidden');
+    });
 
-        // Fechar alert
-        const closeButton = document.getElementById('close-alert');
-        const alertBox = document.getElementById('alert');
-        closeButton?.addEventListener('click', () => {
-            alertBox?.style.setProperty('display', 'none');
-        });
+    // Fechar alert
+    const closeButton = document.getElementById('close-alert');
+    const alertBox = document.getElementById('alert');
+    closeButton?.addEventListener('click', () => {
+        alertBox?.style.setProperty('display', 'none');
+    });
 
-        // Validação formulário
-        const form = document.getElementById('create-author-form');
-        const inputs = form.querySelectorAll('.input-validate');
+    // Validação formulário
+    const form = document.getElementById('create-author-form');
+    const inputs = form.querySelectorAll('.input-validate');
 
-        form.addEventListener('submit', (e) => {
-            let isValid = true;
+    form.addEventListener('submit', (e) => {
+        let isValid = true;
 
-            inputs.forEach(input => {
-                const errorSpan = document.getElementById(`${input.id}-error`);
-                const value = input.value.trim();
+        inputs.forEach(input => {
+            const errorSpan = document.getElementById(`${input.id}-error`);
+            const value = input.value.trim();
 
-                if (!value) {
-                    isValid = false;
-                    input.classList.remove('border-gray-300', 'border-green-500');
-                    input.classList.add('border-red-500');
-                    errorSpan?.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-gray-300', 'border-red-500');
-                    input.classList.add('border-green-500');
-                    errorSpan?.classList.add('hidden');
-                }
-            });
-
-            if (!isValid) {
-                e.preventDefault();
+            if (!value) {
+                isValid = false;
+                input.classList.remove('border-gray-300', 'border-green-500');
+                input.classList.add('border-red-500');
+                errorSpan?.classList.remove('hidden');
+            } else {
+                input.classList.remove('border-gray-300', 'border-red-500');
+                input.classList.add('border-green-500');
+                errorSpan?.classList.add('hidden');
             }
         });
 
-        inputs.forEach(input => {
-            input.addEventListener('blur', () => {
-                const errorSpan = document.getElementById(`${input.id}-error`);
-                const value = input.value.trim();
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
 
-                if (!value) {
-                    input.classList.remove('border-gray-300', 'border-green-500');
-                    input.classList.add('border-red-500');
-                    errorSpan?.classList.remove('hidden');
-                } else {
-                    input.classList.remove('border-gray-300', 'border-red-500');
-                    input.classList.add('border-green-500');
-                    errorSpan?.classList.add('hidden');
-                }
-            });
+    inputs.forEach(input => {
+        const errorSpan = document.getElementById(`${input.id}-error`);
+
+        // Validação ao perder o foco
+        input.addEventListener('blur', () => {
+            const value = input.value.trim();
+
+            if (!value) {
+                input.classList.remove('border-gray-300', 'border-green-500');
+                input.classList.add('border-red-500');
+                errorSpan?.classList.remove('hidden');
+            } else {
+                input.classList.remove('border-gray-300', 'border-red-500');
+                input.classList.add('border-green-500');
+                errorSpan?.classList.add('hidden');
+            }
+        });
+
+        
+        input.addEventListener('input', () => {
+            const value = input.value.trim();
+
+            if (!value) {
+                input.classList.remove('border-gray-300', 'border-green-500');
+                input.classList.add('border-red-500');
+                errorSpan?.classList.remove('hidden');
+            } else {
+                input.classList.remove('border-gray-300', 'border-red-500');
+                input.classList.add('border-green-500');
+                errorSpan?.classList.add('hidden');
+            }
         });
     });
+});
 </script>
 </body>

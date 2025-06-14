@@ -207,6 +207,7 @@
         const form = document.querySelector('form');
         const inputs = form.querySelectorAll('.input-validate');
 
+       
         form.addEventListener('submit', (e) => {
             let isValid = true;
 
@@ -231,9 +232,27 @@
             }
         });
 
+        // Validação ao sair do campo (blur) e em tempo real (input)
         inputs.forEach(input => {
+            const errorSpan = document.getElementById(`${input.id}-error`);
+
+            // blur = quando sai do campo
             input.addEventListener('blur', () => {
-                const errorSpan = document.getElementById(`${input.id}-error`);
+                const value = input.value.trim();
+
+                if (!value) {
+                    input.classList.remove('border-gray-300', 'border-green-500');
+                    input.classList.add('border-red-500');
+                    errorSpan?.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-gray-300', 'border-red-500');
+                    input.classList.add('border-green-500');
+                    errorSpan?.classList.add('hidden');
+                }
+            });
+
+           
+            input.addEventListener('input', () => {
                 const value = input.value.trim();
 
                 if (!value) {
@@ -249,6 +268,7 @@
         });
     });
 </script>
+
 </body>
 
 </html>

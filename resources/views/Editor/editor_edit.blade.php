@@ -60,51 +60,57 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.querySelector('form');
-            const inputs = form.querySelectorAll('.input-validate');
+ <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('.input-validate');
 
-            form.addEventListener('submit', (e) => {
-                let isValid = true;
+    
+        form.addEventListener('submit', (e) => {
+            let isValid = true;
 
-                inputs.forEach(input => {
-                    const errorSpan = document.getElementById(`${input.id}-error`);
-                    const value = input.value.trim();
+            inputs.forEach(input => {
+                const errorSpan = document.getElementById(`${input.id}-error`);
+                const value = input.value.trim();
 
-                    if (!value) {
-                        isValid = false;
-                        input.classList.remove('border-gray-300', 'border-green-500');
-                        input.classList.add('border-red-500');
-                        errorSpan?.classList.remove('hidden');
-                    } else {
-                        input.classList.remove('border-gray-300', 'border-red-500');
-                        input.classList.add('border-green-500');
-                        errorSpan?.classList.add('hidden');
-                    }
-                });
-
-                if (!isValid) {
-                    e.preventDefault();
+                if (!value) {
+                    isValid = false;
+                    input.classList.remove('border-gray-300', 'border-green-500');
+                    input.classList.add('border-red-500');
+                    errorSpan?.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-gray-300', 'border-red-500');
+                    input.classList.add('border-green-500');
+                    errorSpan?.classList.add('hidden');
                 }
             });
 
-            inputs.forEach(input => {
-                input.addEventListener('blur', () => {
-                    const errorSpan = document.getElementById(`${input.id}-error`);
-                    const value = input.value.trim();
-
-                    if (!value) {
-                        input.classList.remove('border-gray-300', 'border-green-500');
-                        input.classList.add('border-red-500');
-                        errorSpan?.classList.remove('hidden');
-                    } else {
-                        input.classList.remove('border-gray-300', 'border-red-500');
-                        input.classList.add('border-green-500');
-                        errorSpan?.classList.add('hidden');
-                    }
-                });
-            });
+            if (!isValid) {
+                e.preventDefault();
+            }
         });
-    </script>
+
+       
+        inputs.forEach(input => {
+            const errorSpan = document.getElementById(`${input.id}-error`);
+
+            const validate = () => {
+                const value = input.value.trim();
+
+                if (!value) {
+                    input.classList.remove('border-gray-300', 'border-green-500');
+                    input.classList.add('border-red-500');
+                    errorSpan?.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-gray-300', 'border-red-500');
+                    input.classList.add('border-green-500');
+                    errorSpan?.classList.add('hidden');
+                }
+            };
+
+            input.addEventListener('blur', validate);
+            input.addEventListener('input', validate); 
+        });
+    });
+</script>
 </body>

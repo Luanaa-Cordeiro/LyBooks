@@ -16,7 +16,7 @@
     <div style="background-color:white; box-shadow: 0 4px 5px rgba(0, 0, 0, 0.267);" class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div style="background-color:#013C3C;"class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
             <h3 style="color:white" class="text-xl font-semibold text-gray-900">
-                Editar Editora
+                Editar Gênero
             </h3>
         </div>
 
@@ -40,10 +40,11 @@
         <form class="space-y-4" action="{{ route('generos.update', ['genero' => $generos->id])}}" method='post'>
                 @csrf
                     <div>
-                        <label for="nome" class="block mb-2 text-sm font-medium text-gray-900">Nome da Editora<span style="color:red; margin-left:5px;">*</span></label>
-                        <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
+                        <label for="nome" class="block mb-2 text-sm font-medium text-gray-900">Gênero<span style="color:red; margin-left:5px;">*</span></label>
+                        <input class="input-validate bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" 
                           value="{{$generos->nome}}" type="text" id="nome" name="nome" placeholder="Nome"/>
                           <input type="hidden" name="_method" value="PUT">
+                          <span id="nome-error" class="text-red-600 text-sm hidden mt-1">Digite um gênero</span>
                     </div>
                     <button style="background-color:#035353;" type="submit" class="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" id="criar">Editar
                     </button>
@@ -55,4 +56,57 @@
         </div>
     </div>
    </div>
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('.input-validate');
+
+        // Validação ao enviar o formulário
+        form.addEventListener('submit', (e) => {
+            let isValid = true;
+
+            inputs.forEach(input => {
+                const errorSpan = document.getElementById(`${input.id}-error`);
+                const value = input.value.trim();
+
+                if (!value) {
+                    isValid = false;
+                    input.classList.remove('border-gray-300', 'border-green-500');
+                    input.classList.add('border-red-500');
+                    errorSpan?.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-gray-300', 'border-red-500');
+                    input.classList.add('border-green-500');
+                    errorSpan?.classList.add('hidden');
+                }
+            });
+
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        // Validação ao sair do campo (blur)
+        inputs.forEach(input => {
+            const validate = () => {
+                const errorSpan = document.getElementById(`${input.id}-error`);
+                const value = input.value.trim();
+
+                if (!value) {
+                    input.classList.remove('border-gray-300', 'border-green-500');
+                    input.classList.add('border-red-500');
+                    errorSpan?.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-gray-300', 'border-red-500');
+                    input.classList.add('border-green-500');
+                    errorSpan?.classList.add('hidden');
+                }
+            };
+
+            input.addEventListener('blur', validate);
+            input.addEventListener('input', validate);
+        });
+    });
+</script>
+
 </body>

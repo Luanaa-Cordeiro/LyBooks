@@ -288,124 +288,122 @@
 
 
     <script>
-        // Seleciona o botão e o menu dropdown
-        const menuButton = document.getElementById('menu-button');
-        const dropdownMenu = document.getElementById('dropdown-menu');
+    // Seleciona o botão e o menu dropdown
+    const menuButton = document.getElementById('menu-button');
+    const dropdownMenu = document.getElementById('dropdown-menu');
 
+    // Evento para abrir e fechar o menu
+    menuButton.addEventListener('click', function (event) {
+        event.stopPropagation();
+        dropdownMenu.classList.toggle('hidden');
+        const isExpanded = dropdownMenu.classList.contains('hidden');
+        menuButton.setAttribute('aria-expanded', !isExpanded);
+    });
 
+    // Fechar o menu se clicar fora dele
+    window.addEventListener('click', function (event) {
+        if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+            menuButton.setAttribute('aria-expanded', 'false');
+        }
+    });
 
+    // Abrir/Fechar modal e alerta
+    document.addEventListener('DOMContentLoaded', () => {
+        const modal = document.getElementById('authentication-modal');
+        const openModalButton = document.querySelector('[data-modal-target="authentication-modal"]');
+        const closeModalButton = document.querySelector('[data-modal-hide="authentication-modal"]');
+        const closeButton = document.getElementById('close-alert');
+        const alertBox = document.getElementById('alert');
 
-        // Evento para abrir e fechar o menu
-        menuButton.addEventListener('click', function(event) {
-            event.stopPropagation();
-            // Alterna a classe 'hidden' para mostrar/ocultar o menu
-            dropdownMenu.classList.toggle('hidden');
-
-            // Atualiza o atributo 'aria-expanded' para true ou false
-            const isExpanded = dropdownMenu.classList.contains('hidden');
-            menuButton.setAttribute('aria-expanded', !isExpanded);
+        openModalButton?.addEventListener('click', () => {
+            modal?.classList.remove('hidden');
         });
 
-
-
-
-        // Fechar o menu se clicar fora dele
-        window.addEventListener('click', function(event) {
-            if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-                dropdownMenu.classList.add('hidden');
-                menuButton.setAttribute('aria-expanded', 'false');
-            }
+        closeModalButton?.addEventListener('click', () => {
+            modal?.classList.add('hidden');
         });
 
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const modal = document.getElementById('authentication-modal');
-            const openModalButton = document.querySelector('[data-modal-target="authentication-modal"]');
-            const closeModalButton = document.querySelector('[data-modal-hide="authentication-modal"]');
-
-            openModalButton.addEventListener('click', () => {
-                modal.classList.remove('hidden');
+        if (closeButton && alertBox) {
+            closeButton.addEventListener('click', () => {
+                alertBox.style.display = 'none';
             });
+        }
+    });
 
+    // Scroll customizado para div
+    document.addEventListener('DOMContentLoaded', () => {
+        const scrollDiv = document.getElementById('scrollContainer');
+        scrollDiv.style.overflowY = 'auto';
+        scrollDiv.style.maxHeight = '500px';
+        scrollDiv.scrollTop = 0;
+    });
 
-            closeModalButton.addEventListener('click', () => {
-                modal.classList.add('hidden');
-            });
+   
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('book-form');
+        const inputs = form.querySelectorAll('.input-validate');
 
+        
+        form.addEventListener('submit', (e) => {
+            let isValid = true;
 
-            const closeButton = document.getElementById('close-alert');
+            inputs.forEach(input => {
+                const errorSpan = document.getElementById(`${input.id}-error`);
+                const value = input.value.trim();
 
-
-            if (closeButton && alertBox) {
-                closeButton.addEventListener('click', () => {
-                    alertBox.style.display = 'none';
-                });
-            }
-        });
-
-
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const scrollDiv = document.getElementById('scrollContainer');
-
-            // Garante que está com overflow habilitado
-            scrollDiv.style.overflowY = 'auto';
-            scrollDiv.style.maxHeight = '500px'; // ou o valor desejado
-
-
-            // Rolar para o topo
-            scrollDiv.scrollTop = 0;
-
-            // Rolar para o final (opcional)
-            // scrollDiv.scrollTop = scrollDiv.scrollHeight;
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('book-form');
-            const inputs = form.querySelectorAll('.input-validate');
-
-            form.addEventListener('submit', (e) => {
-                let isValid = true;
-
-                inputs.forEach(input => {
-                    const errorSpan = document.getElementById(`${input.id}-error`);
-                    const value = input.value.trim();
-
-                    if (!value) {
-                        isValid = false;
-                        input.classList.remove('border-gray-300', 'border-green-500');
-                        input.classList.add('border-red-500');
-                        errorSpan?.classList.remove('hidden');
-                    } else {
-                        input.classList.remove('border-gray-300', 'border-red-500');
-                        input.classList.add('border-green-500');
-                        errorSpan?.classList.add('hidden');
-                    }
-                });
-
-                if (!isValid) {
-                    e.preventDefault();
+                if (!value) {
+                    isValid = false;
+                    input.classList.remove('border-gray-300', 'border-green-500');
+                    input.classList.add('border-red-500');
+                    errorSpan?.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-gray-300', 'border-red-500');
+                    input.classList.add('border-green-500');
+                    errorSpan?.classList.add('hidden');
                 }
             });
 
-            inputs.forEach(input => {
-                input.addEventListener('blur', () => {
-                    const errorSpan = document.getElementById(`${input.id}-error`);
-                    const value = input.value.trim();
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
 
-                    if (!value) {
-                        input.classList.remove('border-gray-300', 'border-green-500');
-                        input.classList.add('border-red-500');
-                        errorSpan?.classList.remove('hidden');
-                    } else {
-                        input.classList.remove('border-gray-300', 'border-red-500');
-                        input.classList.add('border-green-500');
-                        errorSpan?.classList.add('hidden');
-                    }
-                });
+        
+        inputs.forEach(input => {
+            const errorSpan = document.getElementById(`${input.id}-error`);
+
+            input.addEventListener('blur', () => {
+                const value = input.value.trim();
+
+                if (!value) {
+                    input.classList.remove('border-gray-300', 'border-green-500');
+                    input.classList.add('border-red-500');
+                    errorSpan?.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-gray-300', 'border-red-500');
+                    input.classList.add('border-green-500');
+                    errorSpan?.classList.add('hidden');
+                }
+            });
+
+        
+            input.addEventListener('input', () => {
+                const value = input.value.trim();
+
+                if (!value) {
+                    input.classList.remove('border-gray-300', 'border-green-500');
+                    input.classList.add('border-red-500');
+                    errorSpan?.classList.remove('hidden');
+                } else {
+                    input.classList.remove('border-gray-300', 'border-red-500');
+                    input.classList.add('border-green-500');
+                    errorSpan?.classList.add('hidden');
+                }
             });
         });
-    </script>
+    });
+</script>
 
 </body>
 
