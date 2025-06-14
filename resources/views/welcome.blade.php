@@ -322,13 +322,13 @@
           <div class="mb-6 md:mb-0">
               <a href="https://flowbite.com/" class="flex items-center">
                   <img src="{{ asset('assets/images/lybooks.png') }}" class="h-8 me-3" alt="FlowBite Logo" />
-                  <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">LyBooks</span>
+                  <span class="self-center text-2xl font-semibold whitespace-nowrap">LyBooks</span>
               </a>
           </div>
           <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
-                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
-                  <ul style=" color:white;" class="text-gray-500 dark:text-gray-400 font-medium">
+                  <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white ">Resources</h2>
+                  <ul style=" color:white;" class="text-gray-500">
                       <li class="mb-4">
                           <a href="https://flowbite.com/" class="hover:underline">Flowbite</a>
                       </li>
@@ -339,7 +339,7 @@
               </div>
               <div>
                   <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Follow us</h2>
-                  <ul style=" color:white;" class="text-gray-500 dark:text-gray-400 font-medium">
+                  <ul style=" color:white;" class="text-gray-500 font-medium">
                       <li class="mb-4">
                           <a target="_blank" href="https://github.com/Luanaa-Cordeiro/LyBooks.git" class="hover:underline ">Github</a>
                       </li>
