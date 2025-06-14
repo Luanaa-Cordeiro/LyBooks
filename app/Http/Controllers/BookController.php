@@ -48,21 +48,22 @@ class BookController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(StoreBook $request)
-    {
-        $created = $this->book->create([
-            'nome' => $request->input('nome'),
-            'author_id' => $request->input('author_id'),  // Novo campo
-            'editor_id' => $request->input('editor_id'),  // Novo campo
-            'genero_id' => $request->input('genero_id'),  // Novo campo
-            'language_id' => $request->input('language_id'),  // Novo campo
-        ]);
-
-        if ($created) {
-            return redirect()->route('books.index')->with('message', 'Livro "' . $created->nome  . '" criado com sucesso');
-        }
-
-        return redirect()->route('books.index')->with('message', 'Erro ao criar');
+{
+    $data = $request->validated(); // se StoreBook valida os campos
+    if ($request->hasFile('image_path')) {
+        $image = $request->file('image_path');
+        $path = $image->store('books', 'public'); // armazena em storage/app/public/books
+        $data['image_path'] = 'storage/' . $path; // caminho acessível publicamente
     }
+
+    $created = Book::create($data);
+
+    if ($created) {
+        return redirect()->route('books.index')->with('message', 'Livro "' . $created->nome  . '" criado com sucesso');
+    }
+
+    return redirect()->route('books.index')->with('message', 'Erro ao criar');
+}
 
     /**
      * Display the specified resource.

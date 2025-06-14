@@ -10,8 +10,6 @@
 
 <body>
 
-@extends('nav')
-
 <!-- Main modal -->
 <div id="authentication-modal" tabindex="-1" aria-hidden="true" class="hidden fixed inset-0 z-50 flex justify-center items-center">
     <div class="absolute inset-0 bg-black opacity-50"></div>
@@ -31,13 +29,22 @@
 
         <!-- Modal body -->
         <div class="p-4 md:p-5">
-            <form class="space-y-4" action="{{ route('books.store') }}" method="POST">
+           <form class="space-y-4" action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
                 <!-- Nome do livro -->
                 <div>
                     <label for="nome" class="block mb-2 text-sm font-medium text-gray-900">Nome do Livro <span style="color:red;">*</span></label>
+                    <input type="file" name="image_path" id="image_path" required>
+                </div>
+
+
+
+
+                <div>
+                    <label for="nome" class="block mb-2 text-sm font-medium text-gray-900">Nome do Livro <span style="color:red;">*</span></label>
                     <input name="nome" id="nome" required class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Nome do livro" />
                 </div>
+
 
                 <!-- Autor -->
                 <div>
@@ -50,6 +57,13 @@
                     </select>
                 </div>
 
+
+
+
+
+
+
+
                 <!-- Linguagem -->
                 <div>
                     <label for="language_id" class="block mb-2 text-sm font-medium text-gray-900">Linguagem<span style="color:red; margin-left:2px;">*</span></label>
@@ -60,6 +74,13 @@
                         @endforeach
                     </select>
                 </div>
+
+
+
+
+
+
+
 
                 <!-- Gênero -->
                 <div>
@@ -72,6 +93,13 @@
                     </select>
                 </div>
 
+
+
+
+
+
+
+
                 <div>
                     <label for="editor_id" class="block mb-2 text-sm font-medium text-gray-900">Editora<span style="color:red; margin-left:2px;">*</span></label>
                     <select name="editor_id" id="editor_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5">
@@ -81,6 +109,13 @@
                         @endforeach
                     </select>
                 </div>
+
+
+
+
+
+
+
 
                 <!-- Botão -->
                 <div class="flex justify-end">
@@ -93,13 +128,16 @@
     </div>
 </div>
 
+
+
+
+
+
+
+
 <!-- Conteúdo principal -->
-<div class="p-4 sm:ml-80">
-    <div class="tabela p-4 border-2 border-gray-200 border-dashed rounded-lg mt-25">
-        <div class="topo flex justify-between items-center">
-            <h1>Livros!</h1>
-            <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="bg-blue-700 hover:bg-blue-800 text-white px-5 py-2.5 rounded-lg">Adicionar</button>
-        </div>
+<div class="p-4 sm:ml-90">
+    <div class="p-4 border-2 border-gray-200 border-dashed rounded-lg mt-25">
 
         <!-- Mensagens -->
         @if(session()->has('message'))
@@ -110,6 +148,13 @@
                 </span>
             </div>
         @endif
+
+
+
+
+
+
+
 
         @if($errors->any())
             @foreach($errors->all() as $error)
@@ -124,44 +169,223 @@
             @endforeach
         @endif
 
-        <div class="mt-4">
-    @if($books->isEmpty())
-        <div class="text-center text-gray-500 text-lg font-medium rounded p-4">
-            Nenhum Livro cadastrado ainda.
-        </div>
-    @else
-        <!-- Lista de livros -->
-        <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            @foreach($books as $book)
-            <div style="background-color:white;" class="cartao relative overflow-x-auto shadow-md sm:rounded-lg border border-gray-400">
-                <div class="">
-                    <a href="#">
-                    <div style="background-color:#013C3C;" class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200">
-                        <div class="itens_cartoes">
-                            <h5 style="color:white" class="mb-1 text-2xl tracking-tight text-gray-900">{{$book->nome}}</h5>
-                        </div>
-                        </div>
-                    </a>
-                    <p class="px-3 pt-3 mb-3 font-normal text-gray-700">ID: {{$book->id}}</p>
-                    <div class="botao_tab mb-5 mr-5 flex gap-2">
-                    <a href="{{ route('books.edit', ['book' => $book->id]) }}">
-                            <button style="background-color:green;" class="editar">Editar</button>
-                        </a>
-                        <a href="{{ route('books.show', ['book' => $book->id]) }}">
-                            <button style="background-color:#035353;" class="deletar">Mostrar</button>
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-            @endforeach
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+       
+   
+        <!-- Lista de livros -->
+       <div class="sticky top-[120px] z-30 py-10"> <!-- mesma altura da navbar -->
+    <div class="main flex justify-between items-center">
+        <div class="title">
+            <h1 class="text-2xl font-semibold">Livros</h1>
         </div>
-        @endif
+        <div class="id">
+            <span>ID</span>
+        </div>
+        <div class="genero">
+            <span>Gêneros</span>
+        </div>
+        <div class="adicionar">
+             <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class=" text-white px-5 py-2.5 rounded-lg">Adicionar</button>
+        </div>
+    </div>
+    <hr class="mt-2">
+</div>
+
+
+
+
+
+
+
+
+<div id="scrollContainer" style="height: 500px; overflow-y: auto;">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+        <!-- livros -->
+        @foreach($books as $book)
+            <div class="bg-white border border-gray-200 rounded-lg shadow-sm flex flex-col justify-between w-full h-[500px] overflow-hidden">
+    <a href="#">
+        <img src="{{ asset($book->image_path) }}" 
+             class="w-full h-90 object-cover rounded-t-lg" 
+             alt="Imagem do livro">
+    </a>
+    <div class="px-5 pb-1 mt-2 flex flex-col justify-between flex-1">
+        <a href="#">
+            <h5 class="text-xl font-semibold tracking-tight text-gray-900">{{$book->nome}}</h5>
+        </a>
+        <div class="flex items-center mt-2.5 mb-3">
+            <span>Avaliação: 4/5</span>
+        </div>
+        <div class="mb-5 flex justify-end gap-2">
+    <a href="{{ route('books.edit', ['book' => $book->id]) }}"><button style="background-color:green;" class="editar">Editar</button></a>
+    <a href="{{ route('books.show', ['book' => $book->id]) }}"><button style="background-color:#035353;" class="deletar">Mostrar</button></a>
+</div>
+    </div>
+</div>
+        @endforeach
+    </div>
+</div>
+
+
+
+
+
+
+
+
+   
         </div>
     </div>
 </div>
 
+
+
+
+
+
+<nav class="fixed top-0 w-full z-50 navs">
+  <div class="px-3 py-3 lg:px-5 lg:pl-3">
+    <div class="flex items-center justify-between">
+      <div class=" teste flex items-center justify-start rtl:justify-end">
+        <div class="search">
+            <img src="{{ asset('assets/images/lupa.png') }}" alt="">
+            <span>Pesquisar..</span>
+        </div>
+       
+      </div>
+      <div class="relative inline-block text-left flex-direction:row">
+  <div style="margin-right:20px">
+    <button style="margin-right:70px; margin-top:50px; color:black; background-color:white; width:150px" type="button" class="drop inline-flex w-full justify-center gap-x-1.5 rounded-md px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-gray-300 ring-inset hover:bg-gray-50" id="menu-button" aria-expanded="true" aria-haspopup="true">
+    {{ auth()->user()->name }}
+      <svg class="-mr-1 size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+      </svg>
+    </button>
+  </div>
+
+
+
+
+  <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white ring-1 shadow-lg ring-black/5 focus:outline-hidden hidden" id="dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+    <div class="py-1" role="none">
+      <form method="POST" action="{{ route('logout') }}" role="none">
+      @csrf
+        <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Sair</button>
+      </form>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</nav>
+
+
+
+
+<aside id="logo-sidebar" class="sides fixed top-0 z-40 w-80 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0" aria-label="Sidebar">
+   <div class=" side px-5 pb-4 overflow-y-auto ">
+ 
+      <ul class="space-y-2 font-medium">
+      <li>
+               <img class="logo" src="{{ asset('assets/images/logo.png') }}" alt="">
+              <h1 style="color:white; margin-top:15px;">LyBooks</h1>
+         </li>
+         <li>
+         <li>
+            <a href="{{route('dashboard')}}" class=" links_nav flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+               <!--<img src="{{ asset('assets/images/home.png') }}" alt="">-->
+               <span class="ms-3">Início</span>
+            </a>
+         </li>
+         <li>
+            <a href="{{route('books.index')}}" class=" links_nav flex items-center p-2 text-gray-900 rounded-lg  hover:bg-white group">
+            <!--<img src="{{ asset('assets/images/home.png') }}" alt="">-->
+               <span class="active flex-1 ms-3 whitespace-nowrap">Livros</span>
+               <!--<span class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full ">3</span>-->
+            </a>
+         </li>
+         <li>
+            <a href="{{route('editoras.index')}}" class="links_nav flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+           <!--<img src="{{ asset('assets/images/home.png') }}" alt="">-->
+               <span class="flex-1 ms-3 whitespace-nowrap">Editoras</span>
+            </a>
+         </li>
+         <li>
+            <a href="{{route('authors.index')}}" class="links_nav flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+           <!--<img src="{{ asset('assets/images/home.png') }}" alt="">-->
+               <span class="flex-1 ms-3 whitespace-nowrap">Autores</span>
+            </a>
+         </li>
+         <li>
+            <a href="{{route('languages.index')}}" class="links_nav flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100  group">
+           <!--<img src="{{ asset('assets/images/home.png') }}" alt="">-->
+               <span class="flex-1 ms-3 whitespace-nowrap">Linguagens</span>
+            </a>
+         </li>
+         <li>
+            <a href="{{route('generos.index')}}" class="links_nav flex items-center p-2 text-gray-900 rounded-lg  hover:bg-gray-100 group">
+            <!--<img src="{{ asset('assets/images/home.png') }}" alt="">-->
+               <span class="flex-1 ms-3 whitespace-nowrap">Gêneros</span>
+            </a>
+         </li>
+         <li>
+            <a href="{{route('alugueis.index')}}" class="links_nav flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
+           <!--<img src="{{ asset('assets/images/home.png') }}" alt="">-->
+               <span class="flex-1 ms-3 whitespace-nowrap">Alugados</span>
+            </a>
+         </li>
+      </ul>
+   </div>
+</aside>
+
+
+
+
 <script>
+  // Seleciona o botão e o menu dropdown
+  const menuButton = document.getElementById('menu-button');
+  const dropdownMenu = document.getElementById('dropdown-menu');
+
+
+
+
+  // Evento para abrir e fechar o menu
+  menuButton.addEventListener('click', function(event) {
+    event.stopPropagation();
+    // Alterna a classe 'hidden' para mostrar/ocultar o menu
+    dropdownMenu.classList.toggle('hidden');
+   
+    // Atualiza o atributo 'aria-expanded' para true ou false
+    const isExpanded = dropdownMenu.classList.contains('hidden');
+    menuButton.setAttribute('aria-expanded', !isExpanded);
+  });
+
+
+
+
+  // Fechar o menu se clicar fora dele
+  window.addEventListener('click', function(event) {
+    if (!menuButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.classList.add('hidden');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+
     document.addEventListener('DOMContentLoaded', () => {
         const modal = document.getElementById('authentication-modal');
         const openModalButton = document.querySelector('[data-modal-target="authentication-modal"]');
@@ -171,12 +395,14 @@
             modal.classList.remove('hidden');
         });
 
+
         closeModalButton.addEventListener('click', () => {
             modal.classList.add('hidden');
         });
 
+
         const closeButton = document.getElementById('close-alert');
-        const alertBox = document.getElementById('alert');
+ 
 
         if (closeButton && alertBox) {
             closeButton.addEventListener('click', () => {
@@ -184,6 +410,24 @@
             });
         }
     });
+
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const scrollDiv = document.getElementById('scrollContainer');
+
+        // Garante que está com overflow habilitado
+        scrollDiv.style.overflowY = 'auto';
+        scrollDiv.style.maxHeight = '500px'; // ou o valor desejado
+
+
+        // Rolar para o topo
+        scrollDiv.scrollTop = 0;
+
+        // Rolar para o final (opcional)
+        // scrollDiv.scrollTop = scrollDiv.scrollHeight;
+    });
+
 </script>
 
 </body>

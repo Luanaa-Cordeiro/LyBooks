@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('language_id')->constrained('languages')->onDelete('cascade');
             $table->foreignId('genero_id')->constrained('generos')->onDelete('cascade');
             $table->foreignId('editor_id')->constrained('editors')->onDelete('cascade');
+            $table->string('image_path')->nullable(); // Caminho da imagem
 
             $table->timestamps();
         });
